@@ -1,0 +1,16 @@
+{
+    "ADD" : "Add",
+    "ADD_NEW_TASK": "Add New Task",
+    "INPUT_PLACEHOLDER" : "Task Name",
+    "TODO": "Todo",
+    "IN_PROGRESS": "In Progress",
+    "DONE": "Done",
+    "EMPTY_LIST": "List is empty",
+    "Easy" : "Easy",
+    "Medium" : "Medium",
+    "Difficult": "Difficult",
+    "GE": "GE",
+    "EN": "EN",
+    "SELECT": "Select"
+
+}

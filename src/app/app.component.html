@@ -1,0 +1,115 @@
+<div class="langBtns">
+  <button class="btnGe"
+          (click)="useGe()"
+          [class.inactive]='!isKa'>{{"GE" | translate}}</button>
+  <button class="btnEn"
+          (click)="useEn()"
+          [class.inactive]='!isEn'>{{"EN" | translate}}</button>
+</div>
+<div class="container"  >
+  <form class="form-inline"
+        *ngIf="isVisible"
+        #userForm="ngForm"
+        (ngSubmit)="onSubmit(userForm.value)">
+    <div>
+      <input type="text"
+             class="form-control"
+             placeholder="{{'INPUT_PLACEHOLDER' | translate}}"
+             ngModel name="name">
+</div>
+    <div>
+      <select class="form-select"
+              aria-label="Default select example"
+              ngModel name="level">
+        <option   selected [ngValue]="''" hidden>{{"SELECT" | translate}}</option>
+        <option value="Easy">{{"Easy" | translate}}</option>
+        <option value="Medium">{{"Medium" | translate}}</option>
+        <option value="Difficult">{{"Difficult" | translate}}</option>
+      </select>
+    </div>
+    <button type="submit"
+            class="btn btn-primary" >{{"ADD" | translate}}</button>
+  </form>
+  <button   type="button"
+            class="btn btn-primary addTaskBtn"
+            (click) = "makeVisible()">{{ "ADD_NEW_TASK" | translate}}</button>
+</div>
+<!--Cards -->
+<div class="wholeContainer">
+<!-- Todo -->
+      <div class="card border-dark mb-3  forAll"  >
+        <div class="card-header"><fa-icon
+            [icon]="todoIcon"></fa-icon> {{"TODO" | translate}}</div>
+        <div *ngIf="!todo.length" class="empyText">
+          <p>{{"EMPTY_LIST" | translate}}</p>
+        </div>
+        <div class="inner-div" *ngFor="let a of todo; let i = index">
+            <div class="card-body text-dark">
+              <div class="forFlex">
+                <h5 class="card-title">{{a.name}}</h5>
+                <div class="btn-div">
+                  <button type="button"
+                          class="btn btn-primary"
+                          (click)="sendInProgress(i)">></button>
+                  <button type="button"
+                          class="btn btn-danger"
+                          (click)="removeTodo(i)">X</button>
+                </div>
+              </div>
+              <span class="badge rounded-pill"
+                    [ngClass]="getStyle(a.level)">{{a.level | translate}}</span>
+            </div>
+        </div>
+      </div>
+      <!-- In Progress -->
+      <div class="card border-dark mb-3  forAll"  >
+        <div class="card-header"><fa-icon
+             [icon]="todoIcon"></fa-icon> {{"IN_PROGRESS" | translate}}</div>
+        <div  class="empyText" *ngIf="!inProgress.length">
+          <p>{{"EMPTY_LIST" | translate}}</p>
+        </div>
+        <div class="inner-div" *ngFor="let a of inProgress; let i = index" >
+            <div class="card-body text-dark">
+              <div class="forFlex">
+                <h5 class="card-title">{{a.name}} </h5>
+                <div class="btn-div">
+                  <button type="button"
+                          class="btn btn-primary"
+                          (click)="backInTodo(i)"><</button>
+                  <button type="button"
+                          class="btn btn-success"
+                          (click)="sendInDone(i)">></button>
+                </div>
+              </div>
+              <span class="badge rounded-pill "
+                    [ngClass]="getStyle(a.level)">{{a.level | translate}}</span>
+            </div>
+        </div>
+      </div>
+      <!-- Done -->
+      <div class="card border-dark mb-3  forAll"  >
+        <div class="card-header"><fa-icon
+             [icon]="todoIcon"></fa-icon> {{"DONE" | translate}}</div>
+        <div  class="empyText" *ngIf="!done.length">
+          <p>{{"EMPTY_LIST" | translate}}</p>
+        </div>
+        <div class="inner-div"  *ngFor="let a of done; let i = index">
+            <div class="card-body text-dark">
+              <div class="forFlex">
+                <h5 class="card-title">{{a.name}} </h5>
+                <div class="btn-div">
+                  <button type="button"
+                          class="btn btn-primary backInBtn"
+                          (click)="backInProgress(i)"><</button>
+                </div>
+              </div>
+              <span class="badge rounded-pill"
+                    [ngClass]="getStyle(a.level)" >{{a.level | translate}}</span>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+
+
